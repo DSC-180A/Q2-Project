@@ -1,4 +1,6 @@
 
-def get_data
+import pandas as pd
 
-	return ...
+def get_data(path)
+	df = pd.read_csv(path)
+	return df
