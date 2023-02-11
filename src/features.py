@@ -18,7 +18,7 @@ def features(df, Tweet_Col_Name):
     out["contains_pic"] = out[Tweet_Col_Name].apply(lambda x: "pic.twitter" in x) #Check to see if pic is in tweet
     return out
 
-def data_wrangling(df, label_column_name, columns_standardize, Tweet_col_Name):
+def data_wrangling(df, label_col_name, columns_standardize, tweet_col_name):
     out = df.copy()
     out["label"] = out[label_column_name].replace("Quality", False).replace("Spam", True)
     out = standardize_columns(out, columns_standardize)
@@ -26,7 +26,7 @@ def data_wrangling(df, label_column_name, columns_standardize, Tweet_col_Name):
     col_standardized_name = ["standardize_" + i for i in columns_standardize]
     col_keep_other = [Tweet_col_Name, "label", "Type", "is_retweet", "length", "contains_at", "contains_hashtag", "contains_link", "contains_pic"]
     col_keep = col_keep_other + col_standardized_name
-    return out[col_keep]    
+    return out[col_keep]
 
 def preprocess(string):
     tweet = string.lower()
@@ -50,7 +50,7 @@ def preprocess(string):
     return tweet
 
 
-def transform_train_data(df, tweet_column_name, label_column_name):
+def transform_train_data(df, tweet_col_name, label_col_name):
     data = df.copy()
     data["label"] = data[label_column_name].replace("Quality", 0).replace("Spam", 1)
     data["Process_tweet"] = data[tweet_column_name].apply(preprocess)

@@ -8,12 +8,13 @@ import joblib
 
 from features.py import preprocess, transform_train_data
 
-def naive_bayes_model(train_df, tweet_column_name, label_column_name):
-	df = train_df.copy()
-	#Load from json
-	tweet_name = tweet_column_name
-	label_name =  label_column_name
-	model_df = trainsform_train_data(df, tweet_name, label_name)
+def naive_bayes_model(train_df, tweet_column_name, label_column_name, vectorizer_fp, mdl_fp):
+
+	model_df = train_df.copy()
+
+	X_train, X_test, Y_train, Y_test = train_test_split(model_df[tweet_column_name], 
+                                                    model_df[label_column_name], 
+                                                    random_state=1)
 
 	vectorizer = CountVectorizer(analyzer='word', ngram_range=(1, 1)).fit(X_train)
 	x_train_vectorized = vectorizer.transform(X_train)
@@ -21,12 +22,8 @@ def naive_bayes_model(train_df, tweet_column_name, label_column_name):
 	model = MultinomialNB(alpha=0.1) #Multinominal looks at the occurence count
 	model.fit(x_train_vectorized, Y_train)
 
-	#Load from json
-	filename_vectorizer = "vectorizer.sav"
-	filename_NB = "final_naivebayes.sav"
-
-	joblib.dump(vectorizer, filename_vectorizer)
-	joblib.dump(model, filename_NB)
+	joblib.dump(vectorizer, vectorizer_fp)
+	joblib.dump(model, mdl_fp)
 
 	return
 
