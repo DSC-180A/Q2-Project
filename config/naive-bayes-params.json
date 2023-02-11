@@ -3,5 +3,5 @@
     "tweet_column_name": "Process_tweet",
     "label_column_name": "label",
     "vectorizer_fp": "data/out/vectorizer.joblib",
-    "mdl_fp": "data/out/NB.joblib",
+    "mdl_fp": "data/out/NB.joblib"
 }

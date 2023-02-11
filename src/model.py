@@ -6,7 +6,6 @@ from sklearn.naive_bayes import MultinomialNB
 import re
 import joblib
 
-from features.py import preprocess, transform_train_data
 
 def naive_bayes_model(train_df, tweet_column_name, label_column_name, vectorizer_fp, mdl_fp):
 

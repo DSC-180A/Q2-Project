@@ -1,5 +1,5 @@
 {
     "label_col_name": "Type",
     "columns_standardize": ["following", "followers", "actions"],
-    "tweet_col_name": "Tweet",
+    "tweet_col_name": "Tweet"
 }
