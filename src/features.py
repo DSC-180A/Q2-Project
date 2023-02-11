@@ -27,3 +27,31 @@ def data_wrangling(df, label_column_name, columns_standardize, Tweet_col_Name):
     col_keep_other = [Tweet_col_Name, "label", "Type", "is_retweet", "length", "contains_at", "contains_hashtag", "contains_link", "contains_pic"]
     col_keep = col_keep_other + col_standardized_name
     return out[col_keep]    
+
+def preprocess(string):
+    tweet = string.lower()
+    #Remove links
+    tweet = re.sub(r"http\S+", "", tweet)
+    #Remove pics
+    tweet = re.sub(r"pic.twitter\S+", "", tweet)
+    #Remove @
+    tweet = re.sub(r"@\S+", "", tweet)
+    #Remove #
+    tweet = re.sub(r"#\S+", "", tweet)
+    #Replace new line or tab with space
+    tweet = re.sub(r"[\n\t]+", " ", tweet)
+    #Only keeping words
+    tweet = re.sub(r"[^a-zA-Z ]+", "", tweet)
+    #Removing multiple spaces
+    tweet = re.sub(r"[\s\s]+", " ", tweet)
+    #Remove leading spaces
+    tweet=tweet.strip()
+
+    return tweet
+
+
+def transform_train_data(df, tweet_column_name, label_column_name):
+    data = df.copy()
+    data["label"] = data[label_column_name].replace("Quality", 0).replace("Spam", 1)
+    data["Process_tweet"] = data[tweet_column_name].apply(preprocess)
+    return data[["Process_tweet", "label"]]
