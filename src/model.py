@@ -19,7 +19,7 @@ def naive_bayes_model(train_df, tweet_column_name, label_column_name, vectorizer
 	vectorizer = CountVectorizer(analyzer='word', ngram_range=(1, 1)).fit(X_train)
 	x_train_vectorized = vectorizer.transform(X_train)
 
-	model = MultinomialNB(alpha=0.1) #Multinominal looks at the occurence count
+	model = MultinomialNB(alpha=0.5) #Multinominal looks at the occurence count
 	model.fit(x_train_vectorized, Y_train)
 
 	joblib.dump(vectorizer, vectorizer_fp)
