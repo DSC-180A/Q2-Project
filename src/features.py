@@ -56,3 +56,5 @@ def transform_train_data(df, tweet_col_name, label_col_name):
     data["label"] = data[label_col_name].replace("Quality", 0).replace("Spam", 1)
     data["Process_tweet"] = data[tweet_col_name].apply(preprocess)
     return data[["Process_tweet", "label"]]
+
+
