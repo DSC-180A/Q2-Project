@@ -19,9 +19,9 @@ def main(targets):
 	if "data" in targets:
 		with open("config/etl.json") as fh:
 			data_cfg = json.load(fh)
-			train_data = get_train_data(...)
-			twitter_data = get_twitter_data(...)
-		...
+			train_data = get_data(fh["train_data"])
+			twitter_data = get_data(fh["twitter_data"])
+		
 
 	if "features" in targets:
 		with open("config/features-params.json") as fh:
