@@ -85,8 +85,8 @@ class Consumer(object):
 
         # predict using model
         msg_process = preprocess(msg)
-        vectorizer = joblib.load("../data/out/vectorizer.sav")
-        NB = joblib.load("../data/out/final_naivebayes.sav")
+        vectorizer = joblib.load("/data/out/vectorizer.sav")
+        NB = joblib.load("/data/out/final_naivebayes.sav")
         prediction = NB.predict(vectorizer.transform(pd.Series([msg_process])))
 
         return prediction[0]==1

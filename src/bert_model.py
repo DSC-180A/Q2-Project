@@ -65,6 +65,6 @@ def train_model(df, model):
     # Train the model
     history = model.fit(train_dataset, train_labels, epochs=30, batch_size=64, validation_data=(test_dataset, test_labels), callbacks=[es])
     # Save the model
-    model.save('bert_model_2.h5')
+    model.save('data/outbert_model_2.h5')
     
     return history, train_dataset, test_dataset, train_labels, test_labels

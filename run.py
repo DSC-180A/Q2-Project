@@ -27,7 +27,7 @@ def main(targets):
 		os.system("python src/producer_offline.py &")
 		os.system("python src/consumer_base.py &")
 		os.system("python src/consumer_bert.py &")
-		os.system("python src/consumer_nb.py")
+		os.system("python src/consumer_nb.py &")
 
 
 	return
