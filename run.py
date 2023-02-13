@@ -6,7 +6,7 @@ import json
 #Import functions from src
 from src.etl import get_train_data, get_twitter_data
 from src.features import data_wrangling, transform_train_data
-from src.model import naive_bayes_model, sentiment_analyzer
+from src.nb_sentiment_model import naive_bayes_model, sentiment_analyzer
 
 def main(targets):
 
