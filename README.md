@@ -32,21 +32,31 @@ With the above described pipeline, we now have a real-time stream of tweets bein
 - Astra Streaming account
 - Twitter developer account
 
+### Required Envronmental Variables
+Running the producers and consumers require Astra Streaming topic keys. Setting up topics and creating an account is free, and more information can be found at the tutorial [here](https://docs.google.com/document/d/1VS31dXTIAmEkIh9o_9FcAhD-rVvcmnTo_Zm1zSMgCmY/edit).
+
+The shell envrionmental variables are used within the `Producer` and `Consumer` classes within `producer.py` and `consumer.py`.
+- `ASTRA_STREAMING_TOKEN`
+- `ASTRA_STREAMING_URL`
+- `ASTRA_TOPIC`
+
 
 ## How to run
 `run.py test`. This runs a test pipeline on test data.
-`python producer.py`. This makes requests to the Twitter API, publishing remote-work related tweets to a pulsar topic.
-`python consumer.py`. This captures the cleaned tweets, utilizes spam detection ML models, performs sentiment analysis, alters it so that it feeds your needs for downstream analysis.
+This will then run:
+`python src/producer.py`. This makes requests to the Twitter API, publishing remote-work related tweets to a pulsar topic. In its current test tag, it will run the `src/producer_offline.py`, which is encouraged to be used to test.
+`python src/consumer_*.py`. This captures the cleaned tweets, utilizes spam detection ML models, performs sentiment analysis, alters it so that it feeds your needs for downstream analysis. Note that there are three such consumers that will be simultanouesly run in the background. Please use `ps` to check the list of processes and `kill [pid]` to end the processes. This is fully intended as producer and consumers are long running jobs in the background.
+
 
 
 ## Usage
-* Since the publishing time of the tweet is currently calculated by when the consumer receives the tweet from the topic, it's recommended to use concurrently run both `producer.py` and `consumer.py` to get accurate time stamps.
+* Since the publishing time of the tweet is currently calculated by when the consumer receives the tweet from the topic, it's recommended to use concurrently run both `producer.py` and `consumer.py` simultaneously
 * Keep in mind that this requires the setup of the Astra Streaming dashboard, a tutorial is available [here](https://docs.google.com/document/d/1VS31dXTIAmEkIh9o_9FcAhD-rVvcmnTo_Zm1zSMgCmY/edit#heading=h.3znysh7)
 * With the above setup, the only thing left to change is the topic that the `Consumer` subscribes to, which is in its constructor.
 * The path and nameof the generated CSV is modifiable in the constructor of a `Consumer` in `consumer.py`
 
 ## Files
-- `producer.py`: Main driver class for fetching tweets
-- `consumer.py`: Main driver class for filtering spams and performing sentiment analysis.
+- `src/producer.py`: Main driver class for fetching tweets
+- `src/consumer_*.py`: Main driver class for filtering spams and performing sentiment analysis.
 - `requirements.txt`: Required dependencies in Python
 
