@@ -1,0 +1,4 @@
+{
+    "train_data": "./data/train.csv",
+    "twitter_data": "./data/capstone_twets.csv"
+}

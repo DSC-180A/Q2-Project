@@ -6,7 +6,7 @@ import json
 #Import functions from src
 from src.etl import get_train_data, get_twitter_data
 from src.features import data_wrangling, transform_train_data
-from src.nb_model import naive_bayes_model, sentiment_analyzer
+from src.nb_sentiment_model import naive_bayes_model, sentiment_analyzer
 
 def main(targets):
 
@@ -17,6 +17,12 @@ def main(targets):
 		os.system("python src/consumer_base.py &")
 		os.system("python src/consumer_bert.py &")
 
+	if "data" in targets:
+		with open("config/etl.json") as fh:
+			data_cfg = json.load(fh)
+			train_data = get_data(fh["train_data"])
+			twitter_data = get_data(fh["twitter_data"])
+		
 
 	if "features" in targets:
 		with open("config/features-params.json") as fh:

@@ -24,7 +24,7 @@ def naive_bayes_model(train_df, tweet_column_name, label_column_name, vectorizer
 	joblib.dump(vectorizer, vectorizer_fp)
 	joblib.dump(model, mdl_fp)
 
-	return
+	return model
 
 def sentiment_analyzer(sentence):
         """_summary_: Analyze the sentiment of a sentence
