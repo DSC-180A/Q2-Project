@@ -12,6 +12,7 @@ from sentiment_analyzer import sentiment_analyzer
 import pandas as pd
 import joblib
 from features import preprocess
+import nltk
 
 service_account = gspread.service_account(
     filename="config/capstone_googlesheet_key.json")
@@ -73,6 +74,7 @@ class Consumer(object):
             except:
                 print("Still waiting for a message...")
                 time.sleep(1)
+
     def classify_spam(self, msg):
         """
         Classify a message as spam or not
@@ -85,7 +87,7 @@ class Consumer(object):
         msg_process = preprocess(msg)
         vectorizer = joblib.load("../data/out/vectorizer.sav")
         NB = joblib.load("../data/out/final_naivebayes.sav")
-        prediction = NB.predict(vector.transform(pd.Series([msg_process])))
+        prediction = NB.predict(vectorizer.transform(pd.Series([msg_process])))
 
         return prediction[0]==1
     
