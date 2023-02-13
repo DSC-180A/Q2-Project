@@ -11,10 +11,11 @@ from src.nb_sentiment_model import naive_bayes_model, sentiment_analyzer
 def main(targets):
 
 	if "test" in targets:
-		...
+		# run producer.py and consumer.py, both in backround
 
-	if "all" in targets:
-		...
+		os.system("python src/producer_offline.py &")
+		os.system("python src/consumer_base.py &")
+		os.system("python src/consumer_bert.py &")
 
 	if "data" in targets:
 		with open("config/etl.json") as fh:
