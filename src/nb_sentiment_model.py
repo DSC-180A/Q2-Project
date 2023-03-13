@@ -8,7 +8,18 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 
 def naive_bayes_model(train_df, tweet_column_name, label_column_name, vectorizer_fp, mdl_fp):
+    """_summary_: Builds the Multinomial Naive Bayes Model
 
+        Args:
+            train_df: The dataframe to train the model
+            tweet_column_name: A string of the column name containing the tweets
+            label_column_name: A string of the column name containg the labels
+            vectorizer_fp: A string of the file path to save a built file of the vectorizer for the model
+            mdl_fp: A string of the file path to save a built file of the naive bayes model
+
+        Returns:
+            A naive bayes model as well as 2 files containg a vectorizer and the naive bayes model
+    """
 	model_df = train_df.copy()
 
 	X_train, X_test, Y_train, Y_test = train_test_split(model_df[tweet_column_name], 
