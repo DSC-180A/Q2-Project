@@ -1,6 +1,6 @@
 # Q2-Project
 
-## Effect of Spam Detection Models on Real-time Tweet Sentiment																			
+## How Spam Affects the Sentiment of Tweets
 
 ## Contributors
 Lucas Lee, Tyson Tran, Yi (Skylar) Li
